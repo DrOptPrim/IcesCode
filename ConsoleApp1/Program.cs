@@ -1,63 +1,54 @@
-﻿using System;
+using System;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine(" Informacion estudiante ");
-
         string nombre;
+
+        // Pedir nombre del estudiante (no debe estar vacío)
         do
         {
-            Console.Write("Ingrese el nombre del estudiante: ");
+            Console.Write("Nombre del estudiante: ");
             nombre = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(nombre))
-            {
-                Console.WriteLine(" El nombre es obligatorio, intente nuevamente ");
-            }
         } while (string.IsNullOrWhiteSpace(nombre));
 
         int cantidadNotas;
+
+        // Pedir cuántas notas va a ingresar (entre 1 y 5)
         do
         {
-            Console.Write(" Numweros de calificaiones que va a ingresar, (1 a 5): ");
+            Console.Write("Cantidad de calificaciones (1 a 5): ");
         } while (!int.TryParse(Console.ReadLine(), out cantidadNotas) || cantidadNotas < 1 || cantidadNotas > 5);
 
         double suma = 0;
-        int notasValidas = 0;
 
+        // Ingresar las calificaciones y sumarlas
         for (int i = 1; i <= cantidadNotas; i++)
         {
             double nota;
             do
             {
-                Console.Write($"Ingrese la calificación #{i} (1 a 10): ");
+                Console.Write($"Nota #{i} (1 a 10): ");
             } while (!double.TryParse(Console.ReadLine(), out nota) || nota < 1 || nota > 10);
 
             suma += nota;
-            notasValidas++;
         }
 
-        double promedio = suma / notasValidas;
+        double promedio = suma / cantidadNotas;
 
+        Console.WriteLine();
         Console.WriteLine($"Estudiante: {nombre}");
         Console.WriteLine($"Promedio: {promedio:F2}");
 
+        // Clasificación según el promedio
         if (promedio >= 9)
-        {
-            Console.WriteLine("Excelente");
-        }
+            Console.WriteLine("Clasificación: Excelente");
         else if (promedio >= 7)
-        {
-            Console.WriteLine("Bueno");
-        }
+            Console.WriteLine("Clasificación: Bueno");
         else if (promedio >= 6)
-        {
-            Console.WriteLine("Regular");
-        }
+            Console.WriteLine("Clasificación: Regular");
         else
-        {
-            Console.WriteLine("Reprobado");
-        }
+            Console.WriteLine("Clasificación: Reprobado");
     }
 }
